@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import Sidebar from './components/Sidebar';
+import useModal from './hooks/useModal';
+import DropArea from './components/DropArea';
 
 function App() {
+  const [elements, setElements] = useState([]);
+  const { isModalOpen, openModal, closeModal } = useModal();
+  const [selectedElement, setSelectedElement] = useState({});
+
   return (
-    <div className="flex justify-between">
-      <div></div>
-      <div className="w-[326px] bg-[#2D2D2D;] h-screen"></div>
-    </div>
+    <main className="flex justify-between">
+      <DropArea
+        setSelectedElement={setSelectedElement}
+        selectedElement={selectedElement}
+        setElements={setElements}
+        elements={elements}
+      />
+      <Sidebar />
+    </main>
   );
 }
 
