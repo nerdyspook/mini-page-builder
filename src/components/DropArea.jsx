@@ -1,8 +1,8 @@
 const DropArea = ({
   setSelectedElement,
   selectedElement,
-  setElements,
   elements,
+  openModal,
 }) => {
   const handleDragOver = (e) => e.preventDefault();
   const handleOnDrop = (e) => {
@@ -13,6 +13,7 @@ const DropArea = ({
     const y = e.screenY - 120; // pointer is pointing the top-left of the selected element
 
     const newElement = {
+      isNew: true,
       x,
       y,
       className: '',
@@ -21,26 +22,24 @@ const DropArea = ({
     if (elementType === 'button' || selectedElement.type === 'button')
       newElement['className'] =
         'bg-[#0044C1] hover:bg-slate-600 text-white py-3 px-3';
+    else if (elementType === 'input' || selectedElement.type === 'input')
+      newElement['className'] = 'bg-white';
 
     if (elementId) {
-      setElements((prev) =>
-        prev.map((element) =>
-          selectedElement.id === element.id
-            ? { ...element, ...newElement }
-            : element,
-        ),
-      );
+      newElement['isNew'] = false;
+      setSelectedElement({ ...selectedElement, ...newElement });
     } else {
       newElement['type'] = elementType;
       newElement['id'] = new Date().toISOString();
-
-      setElements((prev) => [...prev, newElement]);
+      setSelectedElement(newElement);
     }
+
+    openModal();
   };
 
   return (
     <div
-      className="h-screen w-full flex-1 relative"
+      className="h-screen w-full bg-[#F3F3F3] flex-1 relative"
       onDrop={handleOnDrop}
       onDragOver={handleDragOver}
     >
@@ -60,6 +59,8 @@ const DropArea = ({
           position: 'absolute',
           top: eachElement.y,
           left: eachElement.x,
+          fontSize: `${eachElement.fontSize ?? 16}px`,
+          fontWeight: eachElement.fontWeight ?? 400,
         };
 
         if (type === 'input')
@@ -67,6 +68,7 @@ const DropArea = ({
             <DynamicElement
               type="text"
               key={id}
+              id={id}
               placeholder="Enter text here"
               className="border-solid border-2"
               style={customStyle}
@@ -77,6 +79,7 @@ const DropArea = ({
         return (
           <DynamicElement
             key={id}
+            id={id}
             className={eachElement.className}
             style={customStyle}
             draggable
