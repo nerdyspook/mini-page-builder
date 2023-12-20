@@ -70,7 +70,7 @@ const DropArea = ({
               key={id}
               id={id}
               placeholder="Enter text here"
-              className="border-solid border-2"
+              className="border-solid border-2 px-3"
               style={customStyle}
               draggable
               onDragStart={handleDragStart}

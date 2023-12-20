@@ -62,7 +62,7 @@ const Modal = ({ selectedElement, setElements, closeModal }) => {
             <label htmlFor="x">X</label>
             <input
               id="x"
-              type="text"
+              type="number"
               placeholder="Type here"
               className="px-2 py-3 border"
               value={elementData.x}
@@ -75,7 +75,7 @@ const Modal = ({ selectedElement, setElements, closeModal }) => {
             <label htmlFor="y">Y</label>
             <input
               id="y"
-              type="text"
+              type="number"
               placeholder="Type here"
               className="px-2 py-3 border"
               value={elementData.y}
@@ -88,7 +88,7 @@ const Modal = ({ selectedElement, setElements, closeModal }) => {
             <label htmlFor="fontSize">Font Size</label>
             <input
               id="fontSize"
-              type="text"
+              type="number"
               placeholder="Type here"
               className="px-2 py-3 border"
               value={elementData.fontSize}
@@ -104,7 +104,7 @@ const Modal = ({ selectedElement, setElements, closeModal }) => {
             <label htmlFor="fontWeight">Font Weight</label>
             <input
               id="fontWeight"
-              type="text"
+              type="number"
               placeholder="Type here"
               className="px-2 py-3 border"
               value={elementData.fontWeight}
