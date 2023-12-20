@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { toTitleCase } from '../utils';
 import CrossIcon from './../assets/times.svg?react';
 
-const Modal = ({ selectedElement, setElements, closeModal }) => {
+const Modal = ({
+  setSelectedElement,
+  selectedElement,
+  setElements,
+  closeModal,
+}) => {
   const [elementData, setElementData] = useState({
     text: selectedElement.text ?? '',
     x: selectedElement.x ?? '',
@@ -24,6 +29,7 @@ const Modal = ({ selectedElement, setElements, closeModal }) => {
       );
     }
 
+    setSelectedElement({});
     closeModal();
   };
 

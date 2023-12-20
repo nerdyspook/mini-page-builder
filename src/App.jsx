@@ -14,12 +14,14 @@ function App() {
       <DropArea
         setSelectedElement={setSelectedElement}
         selectedElement={selectedElement}
+        setElements={setElements}
         elements={elements}
         openModal={openModal}
       />
       <Sidebar />
       {isModalOpen && (
         <Modal
+          setSelectedElement={setSelectedElement}
           selectedElement={selectedElement}
           setElements={setElements}
           closeModal={closeModal}

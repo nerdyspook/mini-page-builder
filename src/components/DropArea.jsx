@@ -1,14 +1,30 @@
 const DropArea = ({
   setSelectedElement,
   selectedElement,
+  setElements,
   elements,
   openModal,
 }) => {
   const handleDragOver = (e) => e.preventDefault();
+
   const handleClick = (e, element) => {
     e.stopPropagation();
-    setSelectedElement(element);
+    const newElement = { ...element, isNew: false };
+    setSelectedElement(newElement);
   };
+
+  const handleKeyDown = (e, element) => {
+    if (e.key === 'Enter') {
+      openModal();
+    }
+
+    if (e.key === 'Delete') {
+      setElements((prev) =>
+        prev.filter((each) => each.id !== selectedElement.id),
+      );
+    }
+  };
+
   const handleOnDrop = (e) => {
     const elementType = e.dataTransfer.getData('blockElement');
     const elementId = e.dataTransfer.getData('blockElementId');
@@ -82,6 +98,7 @@ const DropArea = ({
               draggable
               onDragStart={handleDragStart}
               onClick={(e) => handleClick(e, eachElement)}
+              onKeyDown={handleKeyDown}
             />
           );
         return (
@@ -97,6 +114,7 @@ const DropArea = ({
             draggable
             onDragStart={handleDragStart}
             onClick={(e) => handleClick(e, eachElement)}
+            onKeyDown={(e) => handleKeyDown(e, eachElement)}
           >
             {text}
           </DynamicElement>
