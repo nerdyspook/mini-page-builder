@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 const DropArea = ({
   setSelectedElement,
   selectedElement,
@@ -57,6 +59,14 @@ const DropArea = ({
     openModal();
   };
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedElement]);
+
   return (
     <div
       className="h-screen w-full bg-[#F3F3F3] flex-1 relative"
@@ -98,7 +108,6 @@ const DropArea = ({
               draggable
               onDragStart={handleDragStart}
               onClick={(e) => handleClick(e, eachElement)}
-              onKeyDown={handleKeyDown}
             />
           );
         return (
@@ -114,7 +123,6 @@ const DropArea = ({
             draggable
             onDragStart={handleDragStart}
             onClick={(e) => handleClick(e, eachElement)}
-            onKeyDown={(e) => handleKeyDown(e, eachElement)}
           >
             {text}
           </DynamicElement>

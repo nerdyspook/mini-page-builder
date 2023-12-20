@@ -58,6 +58,7 @@ const Modal = ({
               type="text"
               placeholder="Type here"
               className="px-2 py-3 border"
+              autoFocus
               value={elementData.text}
               onChange={(e) =>
                 setElementData((prev) => ({ ...prev, text: e.target.value }))
