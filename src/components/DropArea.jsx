@@ -5,6 +5,10 @@ const DropArea = ({
   openModal,
 }) => {
   const handleDragOver = (e) => e.preventDefault();
+  const handleClick = (e, element) => {
+    e.stopPropagation();
+    setSelectedElement(element);
+  };
   const handleOnDrop = (e) => {
     const elementType = e.dataTransfer.getData('blockElement');
     const elementId = e.dataTransfer.getData('blockElementId');
@@ -42,6 +46,9 @@ const DropArea = ({
       className="h-screen w-full bg-[#F3F3F3] flex-1 relative"
       onDrop={handleOnDrop}
       onDragOver={handleDragOver}
+      onClick={() => {
+        setSelectedElement({});
+      }}
     >
       {elements.map((eachElement) => {
         const { type, text = 'some text', id } = eachElement;
@@ -74,16 +81,22 @@ const DropArea = ({
               style={customStyle}
               draggable
               onDragStart={handleDragStart}
+              onClick={(e) => handleClick(e, eachElement)}
             />
           );
         return (
           <DynamicElement
             key={id}
             id={id}
-            className={eachElement.className}
+            className={`${eachElement.className} ${
+              selectedElement.id === eachElement.id
+                ? 'border-solid border-2 border-red-500'
+                : ''
+            }`}
             style={customStyle}
             draggable
             onDragStart={handleDragStart}
+            onClick={(e) => handleClick(e, eachElement)}
           >
             {text}
           </DynamicElement>
