@@ -19,7 +19,7 @@ function App() {
         elements={elements}
         openModal={openModal}
       />
-      <Sidebar />
+      <Sidebar elements={elements} setElements={setElements} />
       {isModalOpen && (
         <Modal
           setSelectedElement={setSelectedElement}
