@@ -59,6 +59,30 @@ const DropArea = ({
     openModal();
   };
 
+  const handleTouchEnd = (e) => {
+    const x = Math.round(e.changedTouches[0].screenX);
+    const y = Math.round(e.changedTouches[0].screenY);
+
+    console.log({ x, y });
+
+    //   x: x - prev.x - 50,
+    //   y: y - prev.y - 190,
+
+    setSelectedElement((prev) => ({
+      ...prev,
+      x: x - selectedElement.x,
+      y: y - selectedElement.y,
+      className:
+        selectedElement.type === 'button'
+          ? 'bg-[#0044C1] hover:bg-slate-600 text-white py-3 px-3'
+          : selectedElement.type === 'input'
+            ? 'bg-white'
+            : '',
+    }));
+
+    openModal();
+  };
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
 
@@ -69,8 +93,9 @@ const DropArea = ({
 
   return (
     <div
-      className="h-screen w-full bg-[#F3F3F3] flex-1 relative"
+      className="h-screen w-full bg-[#F3F3F3] flex-1 relative overflow-auto"
       onDrop={handleOnDrop}
+      onTouchEnd={handleTouchEnd}
       onDragOver={handleDragOver}
       onClick={() => {
         setSelectedElement({});
@@ -86,6 +111,13 @@ const DropArea = ({
             'blockElementId',
             eachElement.id.toString(),
           );
+        };
+
+        const handleTouchStart = (event) => {
+          event.isDefaultPrevented();
+          event.isPropagationStopped();
+
+          setSelectedElement(eachElement);
         };
 
         const customStyle = {
@@ -108,6 +140,7 @@ const DropArea = ({
               draggable
               onDragStart={handleDragStart}
               onClick={(e) => handleClick(e, eachElement)}
+              //   onTouchStart={handleTouchStart}
             />
           );
         return (

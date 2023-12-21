@@ -11,7 +11,7 @@ function App() {
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
-    <main className="flex justify-between relative">
+    <main className="h-screen w-full flex flex-col justify-between md:flex-row relative">
       <DropArea
         setSelectedElement={setSelectedElement}
         selectedElement={selectedElement}
@@ -19,7 +19,13 @@ function App() {
         elements={elements}
         openModal={openModal}
       />
-      <Sidebar elements={elements} setElements={setElements} />
+      <Sidebar
+        elements={elements}
+        setElements={setElements}
+        setSelectedElement={setSelectedElement}
+        selectedElement={selectedElement}
+        openModal={openModal}
+      />
       {isModalOpen && (
         <Modal
           setSelectedElement={setSelectedElement}

@@ -6,7 +6,13 @@ const blocks = [
   { type: 'button', name: 'Button' },
 ];
 
-const Sidebar = ({ elements, setElements }) => {
+const Sidebar = ({
+  elements,
+  setElements,
+  setSelectedElement,
+  selectedElement,
+  openModal,
+}) => {
   const exportPageConfig = () => {
     const jsonConfig = JSON.stringify(elements, null, 2);
     const blob = new Blob([jsonConfig], { type: 'application/json' });
@@ -40,11 +46,18 @@ const Sidebar = ({ elements, setElements }) => {
   };
 
   return (
-    <section className="w-[326px] bg-[#2D2D2D] h-screen py-5 px-6">
-      <h4 className="text-xl font-bold text-white pb-4">BLOCKS</h4>
-      <ul>
+    <section className=" h-2/8 w-full bg-[#2D2D2D] md:w-[326px] md:h-screen py-2 md:py-5 px-2 md:px-6 overflow-auto">
+      <h4 className="text-md md:text-xl font-bold text-white pb-4">BLOCKS</h4>
+      <ul className="flex gap-2 md:block">
         {blocks.map((eachBlock) => (
-          <Block elementType={eachBlock.name} key={eachBlock.name} />
+          <Block
+            elementType={eachBlock.name}
+            key={eachBlock.name}
+            setSelectedElement={setSelectedElement}
+            selectedElement={selectedElement}
+            openModal={openModal}
+            // handleTouchMove={handleTouchMove}
+          />
         ))}
       </ul>
       <div>
