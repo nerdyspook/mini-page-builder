@@ -1,11 +1,6 @@
 import Grip from './../assets/grip-vertical.svg?react';
 
-const Block = ({
-  elementType,
-  setSelectedElement,
-  selectedElement,
-  openModal,
-}) => {
+const Block = ({ elementType, setSelectedElement }) => {
   const handleDragStart = (event, type) => {
     event.dataTransfer.setData('blockElement', type); // adding metadata to event
   };

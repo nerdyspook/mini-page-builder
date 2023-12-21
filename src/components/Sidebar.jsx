@@ -56,7 +56,6 @@ const Sidebar = ({
             setSelectedElement={setSelectedElement}
             selectedElement={selectedElement}
             openModal={openModal}
-            // handleTouchMove={handleTouchMove}
           />
         ))}
       </ul>

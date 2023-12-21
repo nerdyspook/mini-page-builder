@@ -63,15 +63,11 @@ const DropArea = ({
     const x = Math.round(e.changedTouches[0].screenX);
     const y = Math.round(e.changedTouches[0].screenY);
 
-    console.log({ x, y });
-
-    //   x: x - prev.x - 50,
-    //   y: y - prev.y - 190,
-
     setSelectedElement((prev) => ({
       ...prev,
-      x: x - selectedElement.x,
-      y: y - selectedElement.y,
+      x: prev.isDragging ? x - 50 : x - prev.x - 50,
+      y: prev.isDragging ? y - 190 : y - prev.y - 190,
+      isDragging: false,
       className:
         selectedElement.type === 'button'
           ? 'bg-[#0044C1] hover:bg-slate-600 text-white py-3 px-3'
@@ -113,11 +109,16 @@ const DropArea = ({
           );
         };
 
-        const handleTouchStart = (event) => {
-          event.isDefaultPrevented();
-          event.isPropagationStopped();
-
-          setSelectedElement(eachElement);
+        const handleTouchMove = (e) => {
+          const x = Math.round(e.changedTouches[0].screenX);
+          const y = Math.round(e.changedTouches[0].screenY);
+          setSelectedElement({
+            ...eachElement,
+            x,
+            y,
+            isNew: false,
+            isDragging: true,
+          });
         };
 
         const customStyle = {
@@ -140,7 +141,7 @@ const DropArea = ({
               draggable
               onDragStart={handleDragStart}
               onClick={(e) => handleClick(e, eachElement)}
-              //   onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
             />
           );
         return (
@@ -156,6 +157,7 @@ const DropArea = ({
             draggable
             onDragStart={handleDragStart}
             onClick={(e) => handleClick(e, eachElement)}
+            onTouchMove={handleTouchMove}
           >
             {text}
           </DynamicElement>
