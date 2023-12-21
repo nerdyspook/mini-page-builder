@@ -63,20 +63,22 @@ const DropArea = ({
     const x = Math.round(e.changedTouches[0].screenX);
     const y = Math.round(e.changedTouches[0].screenY);
 
-    setSelectedElement((prev) => ({
-      ...prev,
-      x: prev.isDragging ? x - 50 : x - prev.x - 50,
-      y: prev.isDragging ? y - 190 : y - prev.y - 190,
-      isDragging: false,
-      className:
-        selectedElement.type === 'button'
-          ? 'bg-[#0044C1] hover:bg-slate-600 text-white py-3 px-3'
-          : selectedElement.type === 'input'
-            ? 'bg-white'
-            : '',
-    }));
+    if (selectedElement?.id) {
+      setSelectedElement((prev) => ({
+        ...prev,
+        x: prev.isDragging ? x - 50 : x - prev.x - 50,
+        y: prev.isDragging ? y - 190 : y - prev.y - 190,
+        isDragging: false,
+        className:
+          selectedElement.type === 'button'
+            ? 'bg-[#0044C1] hover:bg-slate-600 text-white py-3 px-3'
+            : selectedElement.type === 'input'
+              ? 'bg-white'
+              : '',
+      }));
 
-    openModal();
+      openModal();
+    }
   };
 
   useEffect(() => {
