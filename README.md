@@ -59,8 +59,10 @@
   - A JSON file will get downloaded.
 
 - **Importing page configuration:**
+
   - User can import any page configuration by clicking on the `Import` button.
   - User needs to follow the following JSON format before importing the file to get the desired outcome.
+
   ```
   [
     {
