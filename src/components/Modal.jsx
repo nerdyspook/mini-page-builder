@@ -8,6 +8,7 @@ const Modal = ({
   setElements,
   closeModal,
 }) => {
+  const isInputElement = selectedElement.type === 'input';
   const [elementData, setElementData] = useState({
     text: selectedElement.text ?? '',
     x: selectedElement.x ?? '',
@@ -52,13 +53,23 @@ const Modal = ({
         </div>
         <div className="px-6 py-5 overflow-y-auto h-3/4">
           <div className="flex flex-col mb-6">
-            <label htmlFor="text">Text</label>
+            <label htmlFor="text">
+              Text{' '}
+              <span
+                className={`text-red-500 ml-2 ${
+                  isInputElement ? 'text-xs' : 'hidden'
+                }`}
+              >
+                *Not required for input element
+              </span>
+            </label>
             <input
               id="text"
               type="text"
               placeholder="Type here"
               className="px-2 py-3 border"
               autoFocus
+              disabled={isInputElement}
               value={elementData.text}
               onChange={(e) =>
                 setElementData((prev) => ({ ...prev, text: e.target.value }))
