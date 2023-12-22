@@ -1,9 +1,11 @@
-#
+# Mini Page Builder
+
+A mini page builder which lets the user drag and drop components from the sidebar.
 
 ## Instructions to run the code
 
 - Download zip or clone this repository.
-- Once code is downloaded do `yarn` to install all the necessary dependencies
+- Once code is downloaded do `yarn` to install all the necessary dependencies.
 - Do `yarn run dev` inside project directory to start the application.
 - The application will start on [http://localhost:3000](http://localhost:3000)
 
@@ -30,8 +32,8 @@
 
 - **Moving elements:**
 
-  - **Web view:** User can click and drag the elements
-  - **Mobile view:** User can touch and drag the elements
+  - **Web view:** User can click and drag the elements.
+  - **Mobile view:** User can touch and drag the elements.
   - Upon dragging the element to their final position, the modal will again open up with the updated coordinates.
 
 - **Removing elements:**
@@ -66,7 +68,7 @@
   ```
   [
     {
-        "id": "2023-12-21T18:20:30.471Z", // any unique ID
+        "id": "2023-12-21T18", // any unique ID
         "type": "button", // element type
         "isNew": false,
         "x": 168,
